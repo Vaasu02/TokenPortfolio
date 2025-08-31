@@ -16,14 +16,14 @@ export const config = createConfig({
       metadata: {
         name: 'Token Portfolio',
         description: 'A comprehensive token portfolio management application',
-        url: 'http://localhost:5173',
-        icons: ['http://localhost:5173/homepageImages/logo.png']
+        url: 'https://token-portfolio-self.vercel.app',
+        icons: ['https://token-portfolio-self.vercel.app/homepageImages/logo.png']
       },
       showQrModal: true,
     }),
     coinbaseWallet({
       appName: 'Token Portfolio',
-      appLogoUrl: 'http://localhost:5173/homepageImages/logo.png'
+      appLogoUrl: 'https://token-portfolio-self.vercel.app/homepageImages/logo.png'
     }),
   ],
   transports: {
