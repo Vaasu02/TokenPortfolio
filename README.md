@@ -1,198 +1,159 @@
-# Frontend Assignment — Token Portfolio (React + Vite + Redux)
+# Token Portfolio - React Application
 
-## Project Overview
+## 🎯 Project Overview
 
-This project involves building a comprehensive Token Portfolio application using React, Vite, and Redux. The application will display cryptocurrency data, allow users to manage their watchlist, integrate wallet connectivity, and provide a seamless user experience across desktop and mobile devices.
+A comprehensive **Token Portfolio management application** built with React, TypeScript, and modern web technologies. This application allows users to track cryptocurrency holdings, manage watchlists, connect wallets, and view real-time market data with interactive charts and responsive design.
 
-## Design and API Resources
+## ✨ Features
 
-- **Figma Designs**: [Provided Design Link]
-- **API Documentation**: [CoinGecko API Documentation](https://docs.coingecko.com/reference/introduction)
+### ✅ **Completed Features**
 
-## Technology Stack
+#### 1. **Portfolio Management**
+- **Portfolio Total Display**: Real-time total value with currency formatting
+- **Interactive Donut Chart**: Visual portfolio distribution with color-coded legend
+- **Last Updated Timestamp**: Shows when data was last refreshed
+- **Value Calculations**: Automatic calculation of `holdings × current_price`
 
-- **Frontend**: React 19 with TypeScript
-- **Build Tool**: Vite
-- **State Management**: Redux Toolkit
-- **Styling**: TailwindCSS
-- **Charts**: Recharts
-- **Data Fetching**: TanStack React Query + Axios
-- **Wallet Integration**: Wagmi
-- **Icons**: Lucide React
+#### 2. **Watchlist Management**
+- **Comprehensive Token Table**: Displays token info, prices, 24h changes, sparklines
+- **Editable Holdings**: Inline editing of token holdings with real-time value updates
+- **Pagination**: Navigate through large watchlists efficiently
+- **Token Actions**: Add, remove, and manage tokens with context menus
 
-## Project Structure and Requirements
+#### 3. **Add Token Modal**
+- **Search Functionality**: Search tokens by name or symbol with debounced input
+- **Trending Tokens**: Discover popular tokens automatically
+- **Multi-Selection**: Select multiple tokens to add simultaneously
+- **Real-time Search**: Live search results from CoinGecko API
 
-### 1. Portfolio (Home) Page
+#### 4. **Wallet Integration**
+- **Multiple Wallet Support**: MetaMask, WalletConnect, Coinbase Wallet
+- **Auto-Connect**: Remembers previously connected wallets
+- **ENS Resolution**: Human-readable wallet addresses
+- **Connection Status**: Visual indicators for wallet connection state
+- **Data Persistence**: Portfolio data persists regardless of wallet connection
 
-#### Portfolio Total Card and Donut Chart
-- Implement the Portfolio Total card exactly as shown in Figma designs
-- Create an interactive donut chart displaying portfolio distribution
-- Ensure chart colors match corresponding list items
-- Display total portfolio value with proper formatting
+#### 5. **Real-time Data**
+- **Live Price Updates**: Automatic refresh every 60 seconds
+- **Manual Refresh**: Manual price updates via refresh button
+- **Market Data**: Current prices, 24h changes, and 7-day sparklines
+- **Error Handling**: Graceful handling of API failures
 
-#### Last Updated Timestamp
-- Show "Last updated" timestamp indicating when data was last fetched
-- Update timestamp on each data refresh
+#### 6. **State Management & Persistence**
+- **Redux Toolkit**: Complete state management with TypeScript
+- **localStorage**: Persistent data across browser sessions
+- **Auto-Save**: Automatic saving of all user data
+- **Data Restoration**: Seamless data recovery on app restart
 
-#### Watchlist Table
-**Columns Required:**
-- **Token**: Logo, name, and symbol
-- **Price**: Current price with proper formatting
-- **24h %**: Percentage change (red for negative, green for positive)
-- **Sparkline (7d)**: 7-day price trend chart
-- **Holdings**: Editable input field for user holdings
-- **Value**: Calculated as `holdings × price`
-- **Row Menu**: Actions menu for each token
+## 🛠 Technology Stack
 
-#### Additional Features
-- **Refresh Prices Button**: Reloads latest market data
-- **Pagination Footer**: Implement as shown in designs
-- **Responsive Design**: Must match both desktop and mobile Figma screens
+### **Frontend**
+- **React 19** - Latest React with concurrent features
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and development server
 
-### 2. Add Token Modal
+### **State Management**
+- **Redux Toolkit** - Modern Redux with simplified API
+- **React Redux** - React bindings for Redux
 
-#### Modal Functionality
-- Opens via "Add Token" button
-- Search input for token discovery
-- Include a "Trending" section for popular tokens
+### **Styling**
+- **TailwindCSS** - Utility-first CSS framework
+- **Custom Styles** - Inline styles for precise design matching
 
-#### Token Display
-**Each token row displays:**
-- Token logo
-- Token name
-- Token symbol
-- Selection radio button
+### **Data & APIs**
+- **TanStack React Query** - Data fetching and caching
+- **Axios** - HTTP client for API requests
+- **CoinGecko API** - Cryptocurrency market data
 
-#### Modal Actions
-- **Add to Watchlist Button**: Enabled only when at least one token is selected
-- **Save Functionality**: Selected tokens are added to the watchlist
-- **Cancel/Close**: Closes modal without saving changes
+### **Charts & Visualization**
+- **Recharts** - React charting library
+- **Custom Sparklines** - 7-day price trend charts
 
-### 3. State Management, Data & Persistence
+### **Wallet Integration**
+- **Wagmi** - React hooks for Ethereum
+- **Viem** - TypeScript interface for Ethereum
+- **Multiple Connectors** - MetaMask, WalletConnect, Coinbase
 
-#### Redux Store Structure
-- Store selected tokens and their holdings
-- Manage portfolio calculations and totals
-- Handle loading, error, and success states
+### **Icons & UI**
+- **Lucide React** - Beautiful, customizable icons
+- **Custom Assets** - Project-specific icons and images
 
-#### Persistence Strategy
-- Use `localStorage` to persist watchlist and holdings data
-- Ensure data restoration when user returns to the application
-- Maintain data consistency across browser sessions
+## 📁 Project Structure
 
-#### Calculations
-- **Value Calculation**: `holdings × current_price`
-- **Portfolio Total**: Sum of all individual token values
-- **Real-time Updates**: Keep calculations synchronized with price updates
-- **Auto-refresh**: Implement periodic price updates
+```
+react-assignment/
+├── src/
+│   ├── components/           # React components
+│   │   ├── AddTokenModal.tsx     # Token addition modal
+│   │   ├── Header.tsx           # Application header
+│   │   ├── Pagination.tsx       # Pagination component
+│   │   ├── PortfolioChart.tsx   # Donut chart component
+│   │   ├── PortfolioTotal.tsx   # Portfolio total display
+│   │   ├── Sparkline.tsx        # Price trend charts
+│   │   ├── WalletButton.tsx     # Wallet connection UI
+│   │   ├── WalletStatus.tsx     # Wallet status display
+│   │   ├── WatchlistActions.tsx # Watchlist action buttons
+│   │   └── WatchlistTable.tsx   # Main token table
+│   ├── config/
+│   │   └── wagmi.ts             # Wallet configuration
+│   ├── hooks/                   # Custom React hooks
+│   │   ├── redux.ts             # Redux hooks
+│   │   ├── usePriceUpdates.ts  # Price update logic
+│   │   ├── useWallet.ts        # Wallet management
+│   │   └── useWalletPersistence.ts # Data persistence
+│   ├── pages/
+│   │   └── Portfolio.tsx       # Main portfolio page
+│   ├── services/
+│   │   └── coinGeckoApi.ts     # API service layer
+│   ├── store/                   # Redux store
+│   │   ├── index.ts            # Store configuration
+│   │   └── slices/
+│   │       └── portfolioSlice.ts # Portfolio state management
+│   ├── utils/
+│   │   └── localStorage.ts     # Data persistence utilities
+│   ├── App.tsx                 # Main app component
+│   └── main.tsx                # Application entry point
+├── public/                     # Static assets
+│   └── homepageImages/        # Project images
+├── package.json               # Dependencies and scripts
+└── README.md                  # This file
+```
 
-### 4. Wallet Connection Integration
+## 🚀 Getting Started
 
-#### Wagmi Integration
-- Implement wallet connection using [wagmi](https://wagmi.sh/react/api/connectors/walletConnect)
-- Support multiple wallet providers
-- Handle connection, disconnection, and account switching
+### **Prerequisites**
+- Node.js 18+ 
+- npm or yarn
+- Modern web browser
+- MetaMask or other Web3 wallet (optional)
 
-#### UI State Management
-- Show connected wallet status in the UI
-- Display wallet address when connected
-- Maintain consistent UI state across wallet operations
-- Ensure watchlist data persists regardless of wallet connection status
+### **Installation**
 
-### 5. Behavior & User Experience
-
-#### Responsive Design
-- **Desktop**: Match Figma desktop designs exactly
-- **Mobile**: Implement mobile-specific layouts as per Figma
-- **Breakpoints**: Ensure smooth transitions between screen sizes
-
-#### State Handling
-- **Loading States**: Show appropriate loading indicators
-- **Empty States**: Display helpful messages when no data is available
-- **Error States**: Handle and display API errors gracefully
-- **Data Validation**: Validate user inputs and provide feedback
-
-#### Performance Optimization
-- Smooth interactions without jank
-- Optimized rendering with React best practices
-- Efficient re-rendering strategies
-- Proper memoization where needed
-
-## API Integration
-
-### CoinGecko API Endpoints
-Based on the [CoinGecko API Documentation](https://docs.coingecko.com/reference/introduction):
-
-- **Market Data**: `/coins/markets` - Get current prices and market data
-- **Token Search**: `/search` - Search for tokens by name or symbol
-- **Trending Tokens**: `/search/trending` - Get trending tokens
-- **Price History**: `/coins/{id}/market_chart` - Get historical price data for sparklines
-- **Token Details**: `/coins/{id}` - Get detailed token information
-
-## Development Phases
-
-### Phase 1: Project Setup & Basic Structure
-- [x] Initialize React + Vite + TypeScript project
-- [x] Install and configure dependencies
-- [x] Set up TailwindCSS
-- [x] Configure Redux store
-- [ ] Set up basic routing (if needed)
-
-### Phase 2: Core Components
-- [ ] Create Portfolio page layout
-- [ ] Implement Watchlist table component
-- [ ] Build Add Token modal
-- [ ] Create reusable UI components
-
-### Phase 3: Data Integration
-- [ ] Set up API service layer
-- [ ] Implement Redux slices for portfolio data
-- [ ] Add localStorage persistence
-- [ ] Integrate React Query for data fetching
-
-### Phase 4: Advanced Features
-- [ ] Implement donut chart with Recharts
-- [ ] Add sparkline charts for 7-day trends
-- [ ] Build editable holdings functionality
-- [ ] Add refresh and pagination features
-
-### Phase 5: Wallet Integration
-- [ ] Configure Wagmi for wallet connection
-- [ ] Implement wallet connection UI
-- [ ] Handle wallet state management
-- [ ] Ensure data persistence across wallet operations
-
-### Phase 6: Polish & Optimization
-- [ ] Implement responsive design
-- [ ] Add loading, empty, and error states
-- [ ] Optimize performance and rendering
-- [ ] Conduct thorough testing across devices
-
-## Setup Instructions
-
-1. **Clone the Repository**:
+1. **Clone the repository**
    ```bash
    git clone [repository-url]
    cd react-assignment
    ```
 
-2. **Install Dependencies** (Already Done):
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. **Start Development Server**:
+3. **Start development server**
    ```bash
    npm run dev
    ```
 
-4. **Access the Application**:
-   Open [http://localhost:5173](http://localhost:5173) in your browser
+4. **Open in browser**
+   ```
+   http://localhost:5173
+   ```
 
-## Build and Deployment
+### **Build for Production**
 
 ```bash
-# Build for production
+# Build the application
 npm run build
 
 # Preview production build
@@ -202,44 +163,120 @@ npm run preview
 npm run lint
 ```
 
-## Deliverables
+## 📊 API Integration
 
-- [x] **GitHub Repository**: Clean, well-structured codebase
-- [ ] **Live Deployment**: Deployed on Vercel/Netlify
-- [ ] **Documentation**: Comprehensive README and code comments
+### **CoinGecko API Endpoints**
 
-## Evaluation Criteria
+The application integrates with CoinGecko API for real-time cryptocurrency data:
 
-### UI Accuracy (25%)
-- Pixel-perfect implementation matching Figma designs
-- Consistent spacing, typography, and colors
-- Proper component hierarchy and layout
+- **Market Data**: `/coins/markets` - Current prices and market information
+- **Token Search**: `/search` - Search tokens by name or symbol
+- **Trending Tokens**: `/search/trending` - Popular tokens
+- **Price History**: `/coins/{id}/market_chart` - Historical data for sparklines
+- **Token Details**: `/coins/{id}` - Detailed token information
 
-### Performance (25%)
-- Efficient state management with Redux
-- Optimized rendering and re-rendering
-- Fast loading times and smooth interactions
+### **Rate Limiting**
+- Automatic rate limiting (1 second between requests)
+- Error handling with fallback options
+- Graceful degradation on API failures
 
-### Responsiveness (25%)
-- Seamless experience across desktop and mobile
-- Proper breakpoint handling
-- Touch-friendly mobile interactions
+## 💾 Data Persistence
 
-### User Experience (25%)
-- Clear, intuitive, and smooth interactions
-- Proper feedback for user actions
-- Graceful error handling and loading states
+### **localStorage Keys**
+- `token-portfolio-watchlist` - User's token watchlist
+- `token-portfolio-holdings` - Token holdings data
+- `token-portfolio-last-updated` - Last update timestamp
+- `token-portfolio-total` - Portfolio total value
+- `lastConnectedWallet` - Previously connected wallet
 
-## Resources and References
+### **Persistence Features**
+- **Automatic Saving**: Data saved on every state change
+- **Cross-Session**: Data persists across browser sessions
+- **Wallet Independent**: Portfolio data persists regardless of wallet connection
+- **Error Recovery**: Graceful handling of storage failures
 
-- **Redux and LocalStorage**: [Persisted Data With Redux and LocalStorage](https://medium.com/@lior_amsalem/persisted-data-with-redux-and-localstorage-415ee034084e)
-- **Wagmi Integration**: [How to connect a wallet to your React app using Wagmi](https://www.0xdev.co/how-to-connect-a-wallet-to-your-react-app-using-wagmi/)
-- **CoinGecko API**: [API Documentation](https://docs.coingecko.com/reference/introduction)
-- **TailwindCSS**: [Documentation](https://tailwindcss.com/docs)
-- **Recharts**: [Documentation](https://recharts.org/)
+## 🔗 Wallet Integration
 
----
+### **Supported Wallets**
+- **MetaMask** - Most popular Ethereum wallet
+- **WalletConnect** - Multi-wallet QR code connection
+- **Coinbase Wallet** - Coinbase's Web3 wallet
+- **Injected Wallets** - Generic wallet support
 
-## Next Steps
+### **Features**
+- **Auto-Connect**: Remembers last connected wallet
+- **ENS Resolution**: Human-readable addresses
+- **Network Support**: Mainnet and Sepolia testnet
+- **Error Handling**: User-friendly error messages
+- **Connection Status**: Visual connection indicators
 
-Ready to proceed with the home layout implementation once Figma design screenshots are provided. The project structure is set up and ready for development following the comprehensive requirements outlined above.
+## 🎨 Design System
+
+### **Color Palette**
+- **Primary**: `#A9E851` (Green for actions and highlights)
+- **Background**: `#212124` (Dark background)
+- **Surface**: `#27272A` (Card backgrounds)
+- **Text**: `#F4F4F5` (Primary text)
+- **Secondary Text**: `#A1A1AA` (Secondary text)
+
+### **Typography**
+- **Font Family**: Inter (Sans-serif)
+- **Font Weights**: 400 (Regular), 500 (Medium), 600 (Semi-bold)
+- **Responsive**: Scales appropriately across devices
+
+### **Components**
+- **Consistent Spacing**: 8px base unit system
+- **Border Radius**: 6px for cards, 12px for modals
+- **Shadows**: Subtle shadows for depth
+- **Transitions**: Smooth 0.2s transitions
+
+## 📱 Responsive Design
+
+### **Breakpoints**
+- **Desktop**: 1440px max-width with centered layout
+- **Tablet**: Responsive scaling for medium screens
+- **Mobile**: Optimized layout for small screens
+
+### **Mobile Features**
+- **Touch-Friendly**: Large touch targets
+- **Swipe Gestures**: Intuitive navigation
+- **Optimized Tables**: Horizontal scrolling for data tables
+- **Modal Overlays**: Full-screen modals on mobile
+
+## 🔧 Development
+
+### **Scripts**
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+```
+
+### **Code Quality**
+- **TypeScript**: Full type safety
+- **ESLint**: Code linting and formatting
+- **Prettier**: Code formatting
+- **Strict Mode**: React strict mode enabled
+
+### **Performance**
+- **Code Splitting**: Automatic code splitting with Vite
+- **Lazy Loading**: Components loaded on demand
+- **Memoization**: Optimized re-rendering
+- **Bundle Optimization**: Tree shaking and minification
+
+### **Code Standards**
+- Follow TypeScript best practices
+- Use functional components with hooks
+- Maintain consistent naming conventions
+- Add proper error handling
+- Include loading states
+
+## 🙏 Acknowledgments
+
+- **CoinGecko** - Cryptocurrency data API
+- **Wagmi** - Ethereum React hooks
+- **Recharts** - Charting library
+- **TailwindCSS** - CSS framework
+- **Vite** - Build tool
+
