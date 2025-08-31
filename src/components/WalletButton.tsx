@@ -84,6 +84,11 @@ const WalletButton: React.FC = () => {
         <button
           onClick={handleConnect}
           disabled={isConnecting}
+          className={`wallet-button flex items-center justify-center font-semibold transition-colors ${
+            isConnecting
+              ? 'opacity-50 cursor-not-allowed'
+              : 'hover:opacity-90'
+          }`}
           style={{
             width: '160px',
             height: '32px',
@@ -92,39 +97,36 @@ const WalletButton: React.FC = () => {
             borderRadius: '100px',
             padding: '6px 10px'
           }}
-          className={`flex items-center justify-center font-semibold transition-colors ${
-            isConnecting
-              ? 'opacity-50 cursor-not-allowed'
-              : 'hover:opacity-90'
-          }`}
         >
           <img 
             src="/homepageImages/wallet.png" 
             alt="Wallet" 
-            className="w-4 h-4"
+            className="wallet-icon w-4 h-4"
           />
           {isConnecting ? (
-            <span style={{
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 500,
-              fontSize: '14px',
-              lineHeight: '20px',
-              letterSpacing: '0%',
-              color: '#18181B',
-              whiteSpace: 'nowrap'
-            }}>
+            <span className="wallet-button-text"
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 500,
+                fontSize: '14px',
+                lineHeight: '20px',
+                letterSpacing: '0%',
+                color: '#18181B',
+                whiteSpace: 'nowrap'
+              }}>
               Connecting...
             </span>
           ) : (
-            <span style={{
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 500,
-              fontSize: '14px',
-              lineHeight: '20px',
-              letterSpacing: '0%',
-              color: '#18181B',
-              whiteSpace: 'nowrap'
-            }}>
+            <span className="wallet-button-text"
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 500,
+                fontSize: '14px',
+                lineHeight: '20px',
+                letterSpacing: '0%',
+                color: '#18181B',
+                whiteSpace: 'nowrap'
+              }}>
               Connect Wallet
             </span>
           )}
@@ -226,6 +228,7 @@ const WalletButton: React.FC = () => {
     <div className="relative">
       <button
         onClick={toggleDropdown}
+        className="wallet-button flex items-center justify-center font-semibold transition-colors hover:opacity-90"
         style={{
           width: '160px',
           height: '32px',
@@ -234,22 +237,21 @@ const WalletButton: React.FC = () => {
           borderRadius: '100px',
           padding: '6px 10px'
         }}
-        className="flex items-center justify-center font-semibold transition-colors hover:opacity-90"
       >
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span className="text-sm font-medium">{displayName}</span>
+          <span className="wallet-button-text text-sm font-medium">{displayName}</span>
         </div>
         <ChevronDown size={16} />
       </button>
 
       {/* Connected Wallet Dropdown */}
       {isDropdownOpen && (
-        <div className="absolute right-0 top-full mt-2 bg-gray-700 rounded-lg shadow-xl border border-gray-600 py-2 z-10 min-w-[200px]">
+        <div className="wallet-dropdown absolute right-0 top-full mt-2 bg-gray-700 rounded-lg shadow-xl border border-gray-600 py-2 z-10 min-w-[200px]">
           <div className="px-4 py-2 border-b border-gray-600">
-            <div className="text-gray-400 text-xs mb-1">Connected Wallet</div>
+            <div className="wallet-dropdown-text text-gray-400 text-xs mb-1">Connected Wallet</div>
             <div className="flex items-center gap-2">
-              <span className="text-white text-sm font-mono">{formattedAddress}</span>
+              <span className="wallet-address text-white text-sm font-mono">{formattedAddress}</span>
               <button
                 onClick={copyAddress}
                 className="text-gray-400 hover:text-white transition-colors"
@@ -261,7 +263,7 @@ const WalletButton: React.FC = () => {
           
           <button
             onClick={handleDisconnect}
-            className="flex items-center gap-3 px-4 py-2 text-red-400 hover:bg-gray-600 w-full text-left text-sm transition-colors"
+            className="wallet-dropdown-text flex items-center gap-3 px-4 py-2 text-red-400 hover:bg-gray-600 w-full text-left text-sm transition-colors"
           >
             <LogOut size={16} />
             Disconnect

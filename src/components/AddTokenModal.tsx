@@ -158,6 +158,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div 
+        className="add-token-modal"
         style={{
           width: '640px',
           height: '480px',
@@ -173,6 +174,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
       >
         {/* Search Input */}
         <div 
+          className="search-input-container"
           style={{
             width: '100%',
             height: '52px',
@@ -189,6 +191,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
             placeholder="Search tokens (e.g., ETH, SOL)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
             style={{
               flex: 1,
               height: '20px',
@@ -212,16 +215,17 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
 
         {/* Error Message */}
         {error && (
-          <div className="px-6 py-3 bg-red-600/10 border-l-4 border-red-600">
+          <div className="error-message px-6 py-3 bg-red-600/10 border-l-4 border-red-600">
             <p className="text-red-400 text-sm">{error}</p>
           </div>
         )}
 
         {/* Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="modal-content flex-1 flex flex-col">
           {/* Section Header */}
-          <div className="px-6 py-4">
+          <div className="section-header px-6 py-4">
             <h3 
+              className="section-title"
               style={{
                 fontFamily: 'font/family/body',
                 fontWeight: 500,
@@ -238,7 +242,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
 
           {/* Loading State */}
           {isLoading && (
-            <div className="flex-1 flex items-center justify-center">
+            <div className="loading-state flex-1 flex items-center justify-center">
               <Loader2 size={24} className="text-gray-400 animate-spin" />
               <span className="ml-2 text-gray-400">
                 {searchQuery.trim() ? 'Searching...' : 'Loading trending tokens...'}
@@ -248,7 +252,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
 
           {/* Empty State */}
           {!isLoading && tokensToDisplay.length === 0 && (
-            <div className="flex-1 flex items-center justify-center">
+            <div className="empty-state flex-1 flex items-center justify-center">
               <p className="text-gray-400">
                 {searchQuery.trim() ? 'No tokens found for your search' : 'No trending tokens available'}
               </p>
@@ -257,12 +261,13 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
 
           {/* Token List */}
           {!isLoading && tokensToDisplay.length > 0 && (
-            <div className="flex-1 px-6 pt-0">
-              <div className="space-y-2 max-h-[280px] overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600">
+            <div className="token-list-container flex-1 px-6 pt-0">
+              <div className="token-list space-y-2 max-h-[280px] overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600">
                 {tokensToDisplay.map((token) => (
                   <div
                     key={token.id}
                     onClick={() => handleTokenSelect(token.id)}
+                    className="token-item"
                     style={{
                       width: '100%',
                       height: '44px',
@@ -289,6 +294,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
                         <img 
                           src={token.image} 
                           alt={token.name}
+                          className="token-image"
                           style={{
                             width: '32px',
                             height: '32px',
@@ -298,16 +304,17 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
                             (e.target as HTMLImageElement).src = '/homepageImages/logo.png';
                           }}
                         />
-                        <div>
-                          <div style={{
-                            color: '#F4F4F5',
-                            fontFamily: 'font/family/body',
-                            fontWeight: 400,
-                            fontSize: 'medium',
-                            lineHeight: '20px',
-                            letterSpacing: '0%',
-                            whiteSpace: 'nowrap'
-                          }}>
+                        <div className="token-info">
+                          <div className="token-name"
+                            style={{
+                              color: '#F4F4F5',
+                              fontFamily: 'font/family/body',
+                              fontWeight: 400,
+                              fontSize: 'medium',
+                              lineHeight: '20px',
+                              letterSpacing: '0%',
+                              whiteSpace: 'nowrap'
+                            }}>
                             {token.name} ({token.symbol})
                           </div>
                         </div>
@@ -315,10 +322,11 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     {/* Star Icon and Checkbox Grouped Together */}
-                    <div className="flex items-center gap-4">
+                    <div className="token-actions flex items-center gap-4">
                       {/* Star Icon - Positioned left of checkbox */}
                       <Star 
                         size={15} 
+                        className="star-icon"
                         style={{
                           width: '15px',
                           height: '15px',
@@ -329,6 +337,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
 
                       {/* Selection Checkbox */}
                       <div 
+                        className="selection-checkbox"
                         style={{
                           width: '12.5px',
                           height: '12.5px',
@@ -360,6 +369,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
 
         {/* Footer */}
         <div 
+          className="modal-footer"
           style={{
             width: '640px',
             height: '56px',
@@ -376,6 +386,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
           <button
             onClick={handleAddToWatchlist}
             disabled={selectedTokens.size === 0}
+            className="add-to-wishlist-button"
             style={{
               width: '114px',
               height: '32px',
@@ -400,6 +411,7 @@ const AddTokenModal: React.FC<AddTokenModalProps> = ({ isOpen, onClose }) => {
             }}
           >
             <span 
+              className="button-text"
               style={{
                 width: '94px',
                 height: '20px',

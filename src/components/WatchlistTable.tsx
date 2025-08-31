@@ -87,6 +87,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
 
   return (
     <div 
+      className="watchlist-table-container"
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -96,8 +97,8 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
         border: '1px solid rgba(255, 255, 255, 0.08)'
       }}
     >
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <div className="overflow-x-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600">
+        <table className="watchlist-table w-full">
           <thead>
             <tr 
               style={{
@@ -106,6 +107,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
               }}
             >
               <th 
+                className="watchlist-table-header"
                 style={{
                   width: '38px',
                   height: '20px',
@@ -122,6 +124,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                 Token
               </th>
               <th 
+                className="watchlist-table-header"
                 style={{
                   width: '38px',
                   height: '20px',
@@ -138,6 +141,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                 Price
               </th>
               <th 
+                className="watchlist-table-header"
                 style={{
                   width: '38px',
                   height: '20px',
@@ -154,6 +158,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                 24h %
               </th>
               <th 
+                className="watchlist-table-header"
                 style={{
                   width: '38px',
                   height: '20px',
@@ -170,6 +175,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                 Sparkline (7d)
               </th>
               <th 
+                className="watchlist-table-header"
                 style={{
                   width: '38px',
                   height: '20px',
@@ -186,6 +192,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                 Holdings
               </th>
               <th 
+                className="watchlist-table-header"
                 style={{
                   width: '38px',
                   height: '20px',
@@ -202,6 +209,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                 Value
               </th>
               <th 
+                className="watchlist-table-header"
                 style={{
                   width: '38px',
                   height: '20px',
@@ -220,10 +228,11 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
             </tr>
           </thead>
           <tbody>
-                         {paginatedWatchlist.map((token) => (
+            {paginatedWatchlist.map((token) => (
               <tr key={token.id} className="hover:bg-gray-750">
                 {/* Token */}
                 <td 
+                  className="watchlist-table-cell"
                   style={{
                     width: '206px',
                     height: '48px',
@@ -242,6 +251,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                     <img 
                       src={token.image} 
                       alt={token.name}
+                      className="watchlist-token-image"
                       style={{
                         width: '32px',
                         height: '32px',
@@ -257,14 +267,15 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                         gap: '4px'
                       }}
                     >
-                      <span className="text-white font-medium">{token.name}</span>
-                      <span className="text-gray-400 text-sm">({token.symbol.toUpperCase()})</span>
+                      <span className="watchlist-token-name text-white font-medium">{token.name}</span>
+                      <span className="watchlist-token-symbol text-gray-400 text-sm">({token.symbol.toUpperCase()})</span>
                     </div>
                   </div>
                 </td>
 
                 {/* Price */}
                 <td 
+                  className="watchlist-table-cell"
                   style={{
                     width: '206px',
                     height: '48px',
@@ -290,6 +301,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
 
                 {/* 24h % */}
                 <td 
+                  className="watchlist-table-cell"
                   style={{
                     width: '206px',
                     height: '48px',
@@ -315,6 +327,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
 
                 {/* Sparkline */}
                 <td 
+                  className="watchlist-table-cell"
                   style={{
                     width: '206px',
                     height: '48px',
@@ -331,6 +344,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
 
                 {/* Holdings */}
                 <td 
+                  className="watchlist-table-cell"
                   style={{
                     width: '206px',
                     height: '48px',
@@ -344,6 +358,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                         type="number"
                         value={editingValue}
                         onChange={(e) => setEditingValue(e.target.value)}
+                        className="watchlist-holdings-input"
                         style={{
                           width: '109px',
                           height: '32px',
@@ -368,6 +383,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                       />
                       <button
                         onClick={() => handleHoldingsSave(token.id)}
+                        className="watchlist-save-button"
                         style={{
                           width: '51px',
                           height: '32px',
@@ -406,6 +422,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
 
                 {/* Value */}
                 <td 
+                  className="watchlist-table-cell"
                   style={{
                     width: '206px',
                     height: '48px',
@@ -430,7 +447,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                 </td>
 
                 {/* Menu */}
-                <td className="py-4 px-6 relative">
+                <td className="watchlist-menu-button py-4 px-6 relative">
                   <button 
                     onClick={() => handleMenuToggle(token.id)}
                     className="text-gray-400 hover:text-white p-1"
@@ -441,6 +458,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                   {openMenuId === token.id && (
                     <div 
                       ref={menuRef}
+                      className="watchlist-menu-dropdown"
                       style={{
                         position: 'absolute',
                         right: '44px',
@@ -456,6 +474,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                     >
                       <button
                         onClick={() => handleEditFromMenu(token.id, token.holdings)}
+                        className="watchlist-menu-item"
                         style={{
                           display: 'flex',
                           flexDirection: 'row',
@@ -476,6 +495,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                         <img 
                           src="/homepageImages/pencil-square.png" 
                           alt="Edit" 
+                          className="watchlist-menu-icon"
                           style={{
                             width: '16px',
                             height: '16px'
@@ -496,6 +516,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                       </button>
                       <button
                         onClick={() => handleRemoveToken(token.id)}
+                        className="watchlist-menu-item"
                         style={{
                           display: 'flex',
                           flexDirection: 'row',
@@ -516,6 +537,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
                         <img 
                           src="/homepageImages/trash.png" 
                           alt="Remove" 
+                          className="watchlist-menu-icon"
                           style={{
                             width: '16px',
                             height: '16px'
@@ -545,6 +567,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
       
       {/* Table Footer - Pagination Section */}
       <div
+        className="watchlist-pagination"
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -559,6 +582,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
       >
         {/* Left side: Results count */}
         <span
+          className="watchlist-pagination-text"
           style={{
             fontFamily: 'Inter, sans-serif',
             fontWeight: 400,
@@ -573,6 +597,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
 
         {/* Right side: Pagination controls */}
         <div
+          className="watchlist-pagination-buttons"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -581,6 +606,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
           }}
         >
           <span
+            className="watchlist-pagination-text"
             style={{
               fontFamily: 'Inter, sans-serif',
               fontWeight: 400,
@@ -595,6 +621,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 1}
+            className="watchlist-pagination-button"
             style={{
               display: 'flex',
               flexDirection: 'row',
@@ -621,6 +648,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
           <button
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
+            className="watchlist-pagination-button"
             style={{
               display: 'flex',
               flexDirection: 'row',

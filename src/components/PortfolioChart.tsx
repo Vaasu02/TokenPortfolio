@@ -29,6 +29,7 @@ const PortfolioChart: React.FC = () => {
 
   return (
     <div 
+      className="portfolio-chart-container"
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -36,44 +37,46 @@ const PortfolioChart: React.FC = () => {
         gap: '20px'
       }}
     >
-             <h2 
-         style={{
-           width: '658.5px',
-           height: '20px',
-           fontFamily: 'Inter, sans-serif',
-           fontWeight: 500,
-           fontSize: '18px',
-           lineHeight: '20px',
-           letterSpacing: '0%',
-           color: '#A1A1AA',
-           marginBottom: '-12px'
-         }}
-       >
-         Portfolio Total
-       </h2>
-       
-       <div className="flex items-center" style={{ gap: '40px' }}>
-                 {/* Chart */}
-         <div 
-           style={{
-             width: '160px',
-             height: '160px',
-             border: '1px solid #FFFFFF',
-             borderRadius: '50%',
-             overflow: 'hidden'
-           }}
-         >
+      <h2 
+        className="portfolio-chart-title"
+        style={{
+          width: '658.5px',
+          height: '20px',
+          fontFamily: 'Inter, sans-serif',
+          fontWeight: 500,
+          fontSize: '18px',
+          lineHeight: '20px',
+          letterSpacing: '0%',
+          color: '#A1A1AA',
+          marginBottom: '-12px'
+        }}
+      >
+        Portfolio Total
+      </h2>
+      
+      <div className="portfolio-chart-wrapper flex items-center" style={{ gap: '40px' }}>
+        {/* Chart */}
+        <div 
+          className="portfolio-chart"
+          style={{
+            width: '160px',
+            height: '160px',
+            border: '1px solid #FFFFFF',
+            borderRadius: '50%',
+            overflow: 'hidden'
+          }}
+        >
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
-                             <Pie
-                 data={chartData}
-                 cx="50%"
-                 cy="50%"
-                 innerRadius={40}
-                 outerRadius={80}
-                 paddingAngle={3}
-                 dataKey="value"
-               >
+              <Pie
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                innerRadius={40}
+                outerRadius={80}
+                paddingAngle={3}
+                dataKey="value"
+              >
                 {chartData.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
@@ -85,38 +88,39 @@ const PortfolioChart: React.FC = () => {
           </ResponsiveContainer>
         </div>
 
-                 {/* Legend */}
-         <div 
-           style={{
-             display: 'flex',
-             flexDirection: 'column',
-             width: '229.25px',
-             gap: '20px'
-           }}
-         >
-                                          {chartData.map((token) => (
-              <div key={token.symbol} className="flex items-center w-full">
-                <div className="flex items-center gap-3 flex-1">
-                  <div 
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: getColor(token.name) }}
-                  />
-                  <span className="text-white text-sm">
-                    {token.name} ({token.symbol})
-                  </span>
-                </div>
-                                 <span 
-                   className="text-white text-sm -mr-56"
-                   style={{
-                     fontWeight: 500,
-                     fontSize: '16px',
-                     color: '#A1A1AA'
-                   }}
-                 >
-                   {token.percentage}%
-                 </span>
+        {/* Legend */}
+        <div 
+          className="portfolio-chart-legend"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '229.25px',
+            gap: '20px'
+          }}
+        >
+          {chartData.map((token) => (
+            <div key={token.symbol} className="portfolio-chart-legend-item flex items-center justify-between w-full">
+              <div className="flex items-center gap-3">
+                <div 
+                  className="portfolio-chart-color-dot w-3 h-3 rounded-full"
+                  style={{ backgroundColor: getColor(token.name) }}
+                />
+                <span className="portfolio-chart-token-name text-white text-sm">
+                  {token.name} ({token.symbol})
+                </span>
               </div>
-            ))}
+              <span 
+                className="portfolio-chart-percentage text-white text-sm -mr-56"
+                style={{
+                  fontWeight: 500,
+                  fontSize: '16px',
+                  color: '#A1A1AA'
+                }}
+              >
+                {token.percentage}%
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

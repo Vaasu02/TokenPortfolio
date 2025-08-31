@@ -14,6 +14,7 @@ const PortfolioTotal: React.FC = () => {
 
   return (
     <div 
+      className="portfolio-total-container"
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -22,6 +23,7 @@ const PortfolioTotal: React.FC = () => {
       }}
     >
       <h2 
+        className="portfolio-total-title"
         style={{
           width: '658.5px',
           height: '20px',
@@ -36,6 +38,7 @@ const PortfolioTotal: React.FC = () => {
         Portfolio Total
       </h2>
       <div 
+        className="portfolio-total-value"
         style={{
           width: '658.5px',
           height: '62px',
@@ -50,6 +53,7 @@ const PortfolioTotal: React.FC = () => {
         {formatCurrency(portfolioTotal)}
       </div>
       <p 
+        className="portfolio-total-updated"
         style={{
           width: '658.5px',
           height: '20px',

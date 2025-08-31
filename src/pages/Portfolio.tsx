@@ -50,13 +50,11 @@ const Portfolio: React.FC = () => {
     <div className="min-h-screen" style={{ backgroundColor: '#212124' }}>
       <Header />
       
-      <main className="container mx-auto px-6 py-8" style={{ maxWidth: '1440px', minHeight: '920px' }}>
-
-
+      <main className="portfolio-container container mx-auto px-6 py-8" style={{ maxWidth: '1440px', minHeight: '920px' }}>
 
         {/* Portfolio Overview - Frame 14 */}
         <div 
-          className="mb-8"
+          className="portfolio-overview mb-8"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -74,6 +72,7 @@ const Portfolio: React.FC = () => {
 
         {/* Watchlist Section - Frame 13 */}
         <div 
+          className="portfolio-watchlist"
           style={{
             display: 'flex',
             flexDirection: 'column',

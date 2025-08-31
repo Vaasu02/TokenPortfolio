@@ -4,7 +4,7 @@ import WalletButton from './WalletButton';
 const Header: React.FC = () => {
   return (
     <header 
-      className="flex items-center justify-between"
+      className="flex items-center justify-between header-container"
       style={{
         backgroundColor: '#212124',
         width: '1440px',
@@ -18,12 +18,14 @@ const Header: React.FC = () => {
         <img 
           src="/homepageImages/logo.png" 
           alt="Token Portfolio" 
+          className="header-logo"
           style={{
             width: '28px',
             height: '28px'
           }}
         />
         <h1 
+          className="header-title"
           style={{
             fontFamily: 'Inter, sans-serif',
             fontWeight: 600,
