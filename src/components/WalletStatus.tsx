@@ -1,5 +1,3 @@
-// Component to display wallet connection status information
-
 import React from 'react';
 import { useWallet } from '../hooks/useWallet';
 
@@ -8,7 +6,7 @@ interface WalletStatusProps {
 }
 
 const WalletStatus: React.FC<WalletStatusProps> = ({ showInPortfolio = false }) => {
-  const { address, isConnected, displayName, chain } = useWallet();
+  const { isConnected, displayName, chain } = useWallet();
 
   if (!showInPortfolio) {
     return null;

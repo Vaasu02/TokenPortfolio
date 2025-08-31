@@ -13,14 +13,14 @@ const PortfolioChart: React.FC = () => {
     percentage: ((token.value / portfolioTotal) * 100).toFixed(1),
   }));
 
-  // Colors for different tokens (matching the Figma design exactly)
+  // Colors for different tokens 
   const COLORS = {
     'Bitcoin': '#f97316', // orange
-    'Ethereum': '#A78BFA', // purple (exact from Figma)
+    'Ethereum': '#A78BFA', // purple 
     'Solana': '#06b6d4', // cyan/light blue
     'Dogecoin': '#10b981', // green
     'USDC': '#f59e0b', // amber
-    'Stellar': '#ec4899', // pink (exact from Figma)
+    'Stellar': '#ec4899', // pink 
   };
 
   const getColor = (tokenName: string) => {

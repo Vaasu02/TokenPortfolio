@@ -38,7 +38,7 @@ const WatchlistTable: React.FC<WatchlistTableProps> = ({ currentPage, itemsPerPa
     return `${sign}${percentage.toFixed(2)}%`;
   };
 
-  // Note: This function is now replaced by handleEditFromMenu but kept for potential future use
+  
   // const handleHoldingsEdit = (tokenId: string, currentHoldings: number) => {
   //   setEditingTokenId(tokenId);
   //   setEditingValue(currentHoldings.toString());

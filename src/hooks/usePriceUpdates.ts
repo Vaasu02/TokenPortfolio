@@ -1,11 +1,20 @@
-// Hook for managing price updates (periodic and manual)
+
 import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from './redux';
 import { updatePrices, setLoading, setError } from '../store/slices/portfolioSlice';
 import { coinGeckoApi } from '../services/coinGeckoApi';
 
+// Define the type for price updates
+interface PriceUpdate {
+  id: string;
+  current_price: number;
+  price_change_percentage_24h: number;
+  sparkline_in_7d: { price: number[] };
+  last_updated: string;
+}
+
 // Fetch updated prices from CoinGecko API
-const fetchUpdatedPrices = async (tokenIds: string[]) => {
+const fetchUpdatedPrices = async (tokenIds: string[]): Promise<PriceUpdate[]> => {
   if (tokenIds.length === 0) return [];
   
   try {
@@ -13,7 +22,7 @@ const fetchUpdatedPrices = async (tokenIds: string[]) => {
     const marketData = await coinGeckoApi.getMarketData(tokenIds, true);
     
     // Format the data for our store
-    const updates = marketData.map(token => ({
+    const updates: PriceUpdate[] = marketData.map(token => ({
       id: token.id,
       current_price: token.current_price,
       price_change_percentage_24h: token.price_change_percentage_24h,
@@ -32,7 +41,7 @@ export const usePriceUpdates = () => {
   const dispatch = useAppDispatch();
   const watchlist = useAppSelector(state => state.portfolio.watchlist);
   const isLoading = useAppSelector(state => state.portfolio.isLoading);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   // Manual refresh function
   const refreshPrices = async () => {
@@ -45,10 +54,25 @@ export const usePriceUpdates = () => {
       const tokenIds = watchlist.map(token => token.id);
       const updatedPrices = await fetchUpdatedPrices(tokenIds);
       
-      dispatch(updatePrices(updatedPrices));
-    } catch (error: any) {
+      // Only update the price-related fields, keeping existing token data
+      const updatedTokens = watchlist.map(token => {
+        const update = updatedPrices.find(u => u.id === token.id);
+        if (update) {
+          return {
+            ...token,
+            current_price: update.current_price,
+            price_change_percentage_24h: update.price_change_percentage_24h,
+            sparkline_in_7d: update.sparkline_in_7d,
+          };
+        }
+        return token;
+      });
+      
+      dispatch(updatePrices(updatedTokens));
+    } catch (error: unknown) {
       console.error('Price refresh failed:', error);
-      dispatch(setError(error.message || 'Failed to refresh prices'));
+      const errorMessage = error instanceof Error ? error.message : 'Failed to refresh prices';
+      dispatch(setError(errorMessage));
     } finally {
       dispatch(setLoading(false));
     }
@@ -78,14 +102,14 @@ export const usePriceUpdates = () => {
 
     startPeriodicUpdates();
 
-    // Cleanup interval on unmount or when watchlist changes
+    
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
     };
-  }, [watchlist.length]); // Re-run when watchlist length changes
+  }, [watchlist.length]); 
 
   // Cleanup on unmount
   useEffect(() => {

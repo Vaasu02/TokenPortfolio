@@ -362,14 +362,14 @@
     white-space: nowrap !important;
   }
   
-  /* Ensure the last column (three dots) is right-aligned */
+  
   .watchlist-table-header:last-child,
   .watchlist-table-cell:last-child {
     text-align: right !important;
     padding-right: 24px !important;
   }
   
-  /* Menu button container alignment */
+  
   .watchlist-menu-button {
     text-align: right !important;
     padding-right: 24px !important;

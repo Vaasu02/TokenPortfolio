@@ -1,5 +1,3 @@
-// Wallet connection button component
-
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Wallet, LogOut, Copy, Check } from 'lucide-react';
 import { useWallet } from '../hooks/useWallet';
@@ -38,13 +36,8 @@ const WalletButton: React.FC = () => {
 
   const handleDisconnect = async () => {
     try {
-      // Close dropdown immediately for better UX
       setIsDropdownOpen(false);
-      
-      // Small delay to allow UI to update
       await new Promise(resolve => setTimeout(resolve, 100));
-      
-      // Disconnect the wallet
       disconnectWallet();
     } catch (error) {
       console.error('Disconnect failed:', error);
@@ -63,13 +56,13 @@ const WalletButton: React.FC = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // Auto-dismiss error after 3 seconds
+  
   useEffect(() => {
     if (error) {
       setShowError(true);
       const timer = setTimeout(() => {
         setShowError(false);
-      }, 3000); // 3 seconds
+      }, 3000); 
 
       return () => clearTimeout(timer);
     } else {
@@ -77,7 +70,7 @@ const WalletButton: React.FC = () => {
     }
   }, [error]);
 
-  // If not connected, show connect button
+  
   if (!isConnected) {
     return (
       <div className="relative">
@@ -132,7 +125,7 @@ const WalletButton: React.FC = () => {
           )}
         </button>
 
-        {/* Connector Selection Modal */}
+        
         {showConnectors && (
           <div 
             className="fixed inset-0 flex items-center justify-center z-50"
@@ -171,7 +164,7 @@ const WalletButton: React.FC = () => {
                   </button>
                 ))}
                 
-                {/* Fallback if no connectors available */}
+                
                 {availableConnectors.length === 0 && (
                   <div className="text-center py-4">
                     <div className="text-gray-400 mb-2">No wallet connectors available</div>
@@ -189,7 +182,7 @@ const WalletButton: React.FC = () => {
           </div>
         )}
 
-        {/* Error Display with Auto-dismiss */}
+        
         {error && showError && (
           <div className="absolute top-full mt-2 right-0 bg-red-600 text-white p-3 rounded-lg text-sm max-w-xs shadow-lg border border-red-500 z-50">
             <div className="flex items-start gap-2">
@@ -208,7 +201,7 @@ const WalletButton: React.FC = () => {
                 ×
               </button>
             </div>
-            {/* Auto-dismiss progress bar */}
+            
             <div className="mt-2 h-1 bg-red-800 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-red-300 rounded-full animate-pulse"
@@ -223,7 +216,7 @@ const WalletButton: React.FC = () => {
     );
   }
 
-  // If connected, show wallet info and dropdown
+  
   return (
     <div className="relative">
       <button
@@ -245,7 +238,7 @@ const WalletButton: React.FC = () => {
         <ChevronDown size={16} />
       </button>
 
-      {/* Connected Wallet Dropdown */}
+      
       {isDropdownOpen && (
         <div className="wallet-dropdown absolute right-0 top-full mt-2 bg-gray-700 rounded-lg shadow-xl border border-gray-600 py-2 z-10 min-w-[200px]">
           <div className="px-4 py-2 border-b border-gray-600">

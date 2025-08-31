@@ -72,7 +72,7 @@ const Sparkline: React.FC<SparklineProps> = ({
     );
   }
 
-  // Transform array data into format expected by Recharts
+  
   const chartData = sparklineData.map((value, index) => ({
     index,
     value
